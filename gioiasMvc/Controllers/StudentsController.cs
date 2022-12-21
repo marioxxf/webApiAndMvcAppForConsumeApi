@@ -54,6 +54,22 @@ namespace gioiasMvc.Controllers
             return _oStudent;
         }
 
+        [HttpGet]
+        public async Task<Student> GetByAproximatedName(string studentToFind)
+        {
+            _oStudent = new Student();
+
+            using (var httpClient = new HttpClient(_clientHandler))
+            {
+                using (var response = await httpClient.GetAsync("https://localhost:7200/api/Student/query/" + studentToFind))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    _oStudent = JsonConvert.DeserializeObject<Student>(apiResponse);
+                }
+            }
+            return _oStudent;
+        }
+
         [HttpPost]
         public async Task<Student> AddStudent(Student student)
         {
