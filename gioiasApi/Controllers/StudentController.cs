@@ -37,6 +37,19 @@ namespace gioiasApi.Controllers
             return Ok(student);
         }
 
+        [HttpGet("query/{name}")]
+        public async Task<ActionResult> GetByAproximatedName(string name)
+        {
+            var student = await _studentRepository.GetByAproximatedName(name);
+
+            if (student == null)
+            {
+                return NotFound("Student not found.");
+            }
+
+            return Ok(student);
+        }
+
         [HttpPost]
         public async Task<ActionResult> AddStudent(Student student)
         {

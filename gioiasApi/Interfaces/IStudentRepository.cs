@@ -9,6 +9,8 @@ namespace gioiasApi.Interfaces
         void Delete(Student student);
 
         Task<Student> GetById(int id);
+        Task<Student> GetByAproximatedName(string toFind);
+
         Task<IEnumerable<Student>> GetAll();
         Task<bool> SaveAllAsync();
     }

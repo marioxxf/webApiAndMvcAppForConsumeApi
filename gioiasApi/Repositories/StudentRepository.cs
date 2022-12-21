@@ -36,6 +36,11 @@ namespace gioiasApi.Repositories
             return await _context.Student.Where(x => x.StudentId == id).FirstOrDefaultAsync();
         }
 
+        public async Task<Student> GetByAproximatedName(string toFind)
+        {
+            return await _context.Student.Where(x => x.Name.Contains(toFind)).FirstOrDefaultAsync();
+        }
+
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
