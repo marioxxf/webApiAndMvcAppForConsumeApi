@@ -1,0 +1,216 @@
+﻿@{
+    ViewData["Title"] = "Students Management";
+}
+
+<style>
+    /* Start of loader */
+        .loader {
+          top: 84%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          position: absolute;
+        }
+        .bar {
+          width: 10px;
+          height: 70px;
+          background: #fff;
+          display: inline-block;
+          transform-origin: bottom center;
+          border-top-right-radius: 20px;
+          border-top-left-radius: 20px;
+          /*   box-shadow:5px 10px 20px inset rgba(255,23,25.2); */
+          animation: loader 1.2s linear infinite;
+        }
+        .bar1 {
+          animation-delay: 0.1s;
+        }
+        .bar2 {
+          animation-delay: 0.2s;
+        }
+        .bar3 {
+          animation-delay: 0.3s;
+        }
+        .bar4 {
+          animation-delay: 0.4s;
+        }
+        .bar5 {
+          animation-delay: 0.5s;
+        }
+        .bar6 {
+          animation-delay: 0.6s;
+        }
+        .bar7 {
+          animation-delay: 0.7s;
+        }
+        .bar8 {
+          animation-delay: 0.8s;
+        }
+
+        @@keyframes loader {
+          0% {
+            transform: scaleY(0.1);
+            background: ;
+          }
+          50% {
+            transform: scaleY(1);
+            background: #0d6efd;
+          }
+          100% {
+            transform: scaleY(0.1);
+            background: transparent;
+          }
+        }
+
+        /* Mobile Area */
+	    @@media screen and (max-width: 680px) {
+            .loader {
+                top: 65%;
+            }
+	    }
+    /* End of loader */
+</style>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<h2>Add a Student</h2>
+<div class="form-group" style="display:none;">
+    <input id="txtStudentId" class="form-control" name="StudentId" />
+</div>
+<div class="form-group">
+    <label for="Name">Name</label>
+    <input id="txtStudentName" class="form-control" name="Name" />
+</div><br />
+<div class="form-group">
+    <label for="Roll">Roll</label>
+    <input id="txtStudentRoll" class="form-control" name="Roll" />
+</div><br />
+<div class="text-center panel-body">
+    <button id="btnSave" class="btn btn-sm btn-primary">Save</button>
+</div>
+
+<button onclick="GetAllStudents()" class="btn btn-primary">Load students</button><br />
+
+<br />
+
+<h2>Student List</h2>
+<table id="tblStudent" class="table">
+    <thead>
+        <tr>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>Roll</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table><br /><br />
+
+<div class="loader">
+    <div class="bar bar1"></div>
+    <div class="bar bar2"></div>
+    <div class="bar bar3"></div>
+    <div class="bar bar4"></div>
+    <div class="bar bar5"></div>
+    <div class="bar bar6"></div>
+    <div class="bar bar7"></div>
+    <div class="bar bar8"></div>
+</div>
+
+<script type="text/javascript">
+    var studentsNow = [];
+
+    $(document).ready(function () {
+        $(".loader").hide();
+        GetAllStudents();
+    });
+
+    function GetAllStudents(){
+        $(".loader").show();
+        setTimeout(function () {
+            $.getJSON("/Students/GetAllStudents", function (students) {
+                $(".loader").hide();
+                studentsNow = students;
+                $("#tblStudent tbody tr").remove();
+                $.map(students, function (student) {
+                    $("#tblStudent tbody").append("<tr>"
+                        + "<td>" + student.studentID + "</td>"
+                        + "<td>" + student.name + "</td>"
+                        + "<td>" + student.roll + "</td>"
+                        + "<td>"
+                        + "     <button class='btn-success' onclick='Edit(" + student.studentID + ")' style='margin-right: 5px;'>Edit</button>"
+                        + "     <button class='btn-danger' onclick='Delete(" + student.studentID + ")'>Delete</button>"
+                        + "</td>"
+                        + "</tr>");
+                });
+            });
+        }, 2000);
+    }
+
+    function Edit(studentId){
+        if(studentId > 0){
+            $.getJSON("/Students/GetById?studentId=" + studentId, function (student) {
+                $("#txtStudentId").val(student.studentID);
+                $("#txtStudentName").val(student.name);
+                $("#txtStudentRoll").val(student.roll);
+            });
+        }
+    }
+
+    function Delete(studentId){
+        if(studentId > 0){
+            $.ajax({
+                url: '/Students/DeleteStudent?studentId=' + studentId,
+                type: 'DELETE',
+                dataType: 'json',
+                success: function (data) {
+                    console.log("Here 2");
+                    GetAllStudents();
+                },
+                error: function (ex) {
+                }
+            });
+        }
+    }
+
+    $("#btnSave").click(function () {
+        var oStudent = {
+            StudentId: $("#txtStudentId").val(),
+            Name: $("#txtStudentName").val(),
+            Roll: $("#txtStudentRoll").val()
+        }; 
+
+        console.log(oStudent);
+
+        var test = "";
+        
+
+        for (var i = 0; i < studentsNow.length; i++) {
+            if (studentsNow[i].studentID == oStudent.StudentId) {
+                test = "ok";
+                break;
+            }
+            else {
+                test = "nok";
+            }
+        }
+
+        if(test == "ok"){
+            console.log("Estudante existente!");
+            $.ajax({
+              url: '/Students/UpdateStudent',
+              type: 'PUT',
+              data: oStudent,
+              success: function(data) {
+                GetAllStudents();
+              }
+            });
+        } else{
+            console.log("Novo estudante!");
+            $.post("/Students/AddStudent", oStudent )
+                .done(function (data) {
+                    GetAllStudents();
+                })
+        }
+    })
+</script>
