@@ -36,7 +36,11 @@ ehthumbs.db
 Thumbs.db
 
 gioiasApi/obj
+gioiasApi/.vs
+gioiasApi/bin/Debug
+gioiasMvc/.vs
 gioiasMvc/obj
+gioiasMvc/bin/Debug
 gioiasApi/appsettings.json
 gioiasApi/bin/Debug/net6.0/appsettings.json
 gioiasApi/bin/Release/net6.0/appsettings.json

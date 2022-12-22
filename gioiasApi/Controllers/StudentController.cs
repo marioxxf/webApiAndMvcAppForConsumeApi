@@ -31,7 +31,8 @@ namespace gioiasApi.Controllers
 
             if (student == null)
             {
-                return NotFound("Student not found.");
+                Student nullStudent = new Student();
+                return NotFound(nullStudent);
             }
 
             return Ok(student);
@@ -44,7 +45,8 @@ namespace gioiasApi.Controllers
 
             if (student == null)
             {
-                return NotFound("Student not found.");
+                Student nullStudent = new Student();
+                return NotFound(nullStudent);
             }
 
             return Ok(student);
