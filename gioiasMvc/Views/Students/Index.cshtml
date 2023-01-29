@@ -126,6 +126,7 @@
     });
 
     function GetAllStudents(){
+	$("#tblStudent").hide();
         $(".loader").show();
         setTimeout(function () {
             $.getJSON("/Students/GetAllStudents", function (students) {
@@ -143,6 +144,7 @@
                         + "</td>"
                         + "</tr>");
                 });
+		$("#tblStudent").show();
             });
         }, 2000);
     }
