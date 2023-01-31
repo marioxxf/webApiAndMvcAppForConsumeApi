@@ -29,7 +29,7 @@ namespace gioiasMvc.Controllers
 
             using(var httpClient = new HttpClient(_clientHandler)) 
             {
-                using(var response = await httpClient.GetAsync("https://localhost:7200/api/Student"))
+                using(var response = await httpClient.GetAsync("https://localhost:7200/api/Student?apiKey=secretKey"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     _oStudents = JsonConvert.DeserializeObject<List<Student>>(apiResponse);
@@ -45,7 +45,7 @@ namespace gioiasMvc.Controllers
 
             using (var httpClient = new HttpClient(_clientHandler))
             {
-                using (var response = await httpClient.GetAsync("https://localhost:7200/api/Student/" + studentId))
+                using (var response = await httpClient.GetAsync("https://localhost:7200/api/Student/" + studentId + "?apiKey=secretKey"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     _oStudent = JsonConvert.DeserializeObject<Student>(apiResponse);
@@ -61,7 +61,7 @@ namespace gioiasMvc.Controllers
 
             using (var httpClient = new HttpClient(_clientHandler))
             {
-                using (var response = await httpClient.GetAsync("https://localhost:7200/api/Student/query/" + studentToFind))
+                using (var response = await httpClient.GetAsync("https://localhost:7200/api/Student/query/" + studentToFind + "?apiKey=secretKey"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     _oStudent = JsonConvert.DeserializeObject<Student>(apiResponse);
@@ -78,7 +78,7 @@ namespace gioiasMvc.Controllers
             using (var httpClient = new HttpClient(_clientHandler))
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(student), Encoding.UTF8, "application/json");
-                using (var response = await httpClient.PostAsync("https://localhost:7200/api/Student", content))
+                using (var response = await httpClient.PostAsync("https://localhost:7200/api/Student?apiKey=secretKey", content))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     _oStudent = JsonConvert.DeserializeObject<Student>(apiResponse);
@@ -95,7 +95,7 @@ namespace gioiasMvc.Controllers
             using (var httpClient = new HttpClient(_clientHandler))
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(student), Encoding.UTF8, "application/json");
-                using (var response = await httpClient.PutAsync("https://localhost:7200/api/Student", content))
+                using (var response = await httpClient.PutAsync("https://localhost:7200/api/Student?apiKey=secretKey", content))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     _oStudent = JsonConvert.DeserializeObject<Student>(apiResponse);
@@ -110,7 +110,7 @@ namespace gioiasMvc.Controllers
             _oStudent = new Student();
             using (var httpClient = new HttpClient(_clientHandler))
             {
-                using (var response = await httpClient.DeleteAsync("https://localhost:7200/api/Student/" + studentId))
+                using (var response = await httpClient.DeleteAsync("https://localhost:7200/api/Student/" + studentId + "?apiKey=secretKey"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     _oStudent = JsonConvert.DeserializeObject<Student>(apiResponse);
