@@ -3,6 +3,11 @@ using gioiasApi.Models;
 using gioiasApi.Repositories;
 using Microsoft.EntityFrameworkCore;
 
+static bool ValidateApiKey(string apiKey)
+{
+    return apiKey == "secretKey";
+}
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -31,6 +36,26 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.Use(async (context, next) =>
+{
+
+    var apiKey = "";
+
+    if(context.Request.Query["apiKey"] != "")
+    {
+        apiKey = context.Request.Query["apiKey"].ToString();
+    }
+
+    if (!ValidateApiKey(apiKey))
+    {
+        context.Response.StatusCode = 401;
+        await context.Response.WriteAsync("Unauthorized");
+        return;
+    }
+
+    await next();
+});
 
 app.MapControllers();
 
