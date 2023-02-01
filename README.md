@@ -1,7 +1,7 @@
 <h1>Web ASP.NET API and MVC application for interface</h1>
 <p>Basic API for matriculate student's management. You can check these via links below: <br />
-Interface: https://gioias.net <br />
-API: https://api.gioias.net</p>
+Interface: https://gioias.net (offline)<br />
+API: https://api.gioias.net (offline)</p>
 <h2>State of the project</h2>
 <p>Finished.</p>
 <h2>Images</h2>
