@@ -19,6 +19,8 @@ namespace gioiasMvc.Controllers
         
         public IActionResult Index()
         {
+            HttpContext.Session.SetString("SessionKey", "Gioias"); // Isso trava a geração de um novo SessionID a cada requisição na mesma instância de navegador
+            ViewData["SessionId"] = HttpContext.Session.Id;
             return View();
         }
 
