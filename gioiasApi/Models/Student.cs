@@ -12,11 +12,9 @@ namespace gioiasApi.Models
     {
         [Key]
         public int StudentId { get; set; }
-
         [StringLength(50)]
         [Unicode(false)]
         public string Name { get; set; }
-
         [StringLength(25)]
         [Unicode(false)]
         public string Roll { get; set; }

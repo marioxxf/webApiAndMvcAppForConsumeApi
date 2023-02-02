@@ -19,6 +19,7 @@ namespace gioiasApi.Models
         }
 
         public virtual DbSet<Student> Student { get; set; }
+        public virtual DbSet<UserAccount> UserAccount { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
