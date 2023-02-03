@@ -32,6 +32,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.rawgit.com/ricmoo/aes-js/e27b99df/index.js"></script>
 </head>
+<style>
+    html, body {
+        background-color: #e1e2e3;
+    }
+</style>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 navbarGioiano">
@@ -74,9 +79,8 @@
                                                 <a class="dropdown-item" href="/auth">Criar conta</a>
                                             </li>
                                             <li>
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                    Launch demo modal
-                                                </button>
+                                                <a class="dropdown-item" data-bs-toggle="modal" href="#" data-bs-target="#exampleModal">Logar-se</a>
+                                                
                                             </li>
                                         </ul>
                                     </div>
@@ -101,9 +105,9 @@
             <div class="loginUserAccountMain">
                 <h1 class="newUserAccountTitle">Digite seu e-mail</h1>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" size="25" id="txtEmailLoginForm" name="txtEmailLoginForm" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control"  size="25" id="txtEmailLoginForm" name="txtEmailLoginForm" aria-describedby="basic-addon1">
                 </div>
-                <label id="emailCheckLoginForm" name="emailCheckLoginForm"></label>
+                <label id="emailCheckLoginForm" name="emailCheckLoginForm"></label><br /><br />
 
                 <h1 class="newUserAccountTitle">Insira uma senha</h1>
                 <div style="display: flex; gap: 7px;">
@@ -152,7 +156,7 @@
             url: '@Url.Action("DisconnectUserAccountLogged", "Auth")',
           success: function(response) {
             console.log("User Account has been disconnected.");
-            location.reload();
+                window.location.href = "/";
           }
         });
     }

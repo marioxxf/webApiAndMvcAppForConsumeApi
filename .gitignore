@@ -45,3 +45,4 @@ gioiasApi/appsettings.json
 gioiasApi/bin/Debug/net6.0/appsettings.json
 gioiasApi/bin/Release/net6.0/appsettings.json
 gioiasApi/obj/Release/net6.0/PubTmp/Out/appsettings.json
+gioiasMvc/.vs/gioiasMvc/v17/.suo

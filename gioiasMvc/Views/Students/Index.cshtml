@@ -5,7 +5,7 @@
 <style>
     /* Start of loader */
         .loader {
-          top: 84%;
+          top: 78%;
           left: 50%;
           transform: translate(-50%, -50%);
           position: absolute;
@@ -49,7 +49,7 @@
         @@keyframes loader {
           0% {
             transform: scaleY(0.1);
-            background: ;
+            background: #0d6efd;
           }
           50% {
             transform: scaleY(1);
@@ -64,7 +64,7 @@
         /* Mobile Area */
 	    @@media screen and (max-width: 680px) {
             .loader {
-                top: 65%;
+                top: 60%;
             }
 	    }
     /* End of loader */
@@ -72,49 +72,51 @@
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
-<h2>Cadastre um estudante @ViewData["SessionId"]</h2>
-<div class="form-group" style="display:none;">
-    <input id="txtStudentId" class="form-control" name="StudentId" />
-</div>
-<div class="form-group">
-    <label for="Name">Nome</label>
-    <input id="txtStudentName" class="form-control" name="Name" />
-</div><br />
-<div class="form-group">
-    <label for="Roll">Matrícula</label>
-    <input id="txtStudentRoll" class="form-control" name="Roll" />
-</div><br />
-<div class="text-center panel-body">
-    <button id="btnSave" class="btn btn-sm btn-primary">Salvar</button>
-</div><br />
+<div class="mainDiv">
+    <h2>Cadastre um estudante</h2>
+    <div class="form-group" style="display:none;">
+        <input id="txtStudentId" class="form-control" name="StudentId" />
+    </div>
+    <div class="form-group">
+        <label for="Name">Nome</label>
+        <input id="txtStudentName" class="form-control" name="Name" />
+    </div><br />
+    <div class="form-group">
+        <label for="Roll">Matrícula</label>
+        <input id="txtStudentRoll" class="form-control" name="Roll" />
+    </div><br />
+    <div class="text-center panel-body">
+        <button id="btnSave" class="btn btn-sm btn-primary">Salvar</button>
+    </div><br />
 
-<button onclick="GetAllStudents()" class="btn btn-primary">Recarregar lista de estudantes</button><br />
+    <button onclick="GetAllStudents()" class="btn btn-primary">Recarregar lista de estudantes</button><br />
 
-<br />
+    <br />
 
-<h2>Lista de estudantes cadastrados</h2>
-<table id="tblStudent" class="table">
-    <thead>
-        <tr>
-            <th>ID do estudante</th>
-            <th>Nome</th>
-            <th>Número da matrícula</th>
-            <th>Ação</th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table><br /><br />
+    <h2>Lista de estudantes cadastrados</h2>
+    <table id="tblStudent" class="table">
+        <thead>
+            <tr>
+                <th>ID do estudante</th>
+                <th>Nome</th>
+                <th>Número da matrícula</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table><br /><br /><br /><br /><br />
 
-<div class="loader">
-    <div class="bar bar1"></div>
-    <div class="bar bar2"></div>
-    <div class="bar bar3"></div>
-    <div class="bar bar4"></div>
-    <div class="bar bar5"></div>
-    <div class="bar bar6"></div>
-    <div class="bar bar7"></div>
-    <div class="bar bar8"></div>
+    <div class="loader">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+        <div class="bar bar4"></div>
+        <div class="bar bar5"></div>
+        <div class="bar bar6"></div>
+        <div class="bar bar7"></div>
+        <div class="bar bar8"></div>
+    </div>
 </div>
 
 <script type="text/javascript">

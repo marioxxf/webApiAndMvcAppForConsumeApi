@@ -3,15 +3,14 @@
     ViewBag.Title = "Home Page";
 
     var session = middlewareForSessionUse._httpContextAccessor.HttpContext.Session;
-    int userAccountIdLogged = Convert.ToInt32(session.GetString("UserAccountIdLogged"));
+    var userAccountIdLogged = session.GetString("UserAccountIdLogged");
     var userAccountUsernameLogged = session.GetString("UserAccountUsernameLogged");
 }
 
-<h1>@userAccountIdLogged @userAccountUsernameLogged</h1>
 @{
-    if (userAccountIdLogged <= 0 || userAccountIdLogged == null)
+    if (userAccountIdLogged == "" || userAccountIdLogged == "0" || userAccountIdLogged == null)
     {
-        <div class="newUserAccountMain">
+        <div class="mainDiv">
             <h1 class="newUserAccountTitle">Digite seu e-mail</h1>
             <h2 class="newUserAccountSubTitle">Certifique-se de que você tenha acesso a ele.</h2>
             <div class="input-group mb-3">
