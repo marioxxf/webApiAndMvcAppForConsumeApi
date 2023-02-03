@@ -3,7 +3,7 @@
 Interface: https://gioias.net (offline)<br />
 API: https://api.gioias.net (offline)</p>
 <h2>State of the project</h2>
-<p>Finished.</p>
+<p>In progress.</p>
 <h2>Images</h2>
 <details>
    <summary><h3>Working</h3></summary>

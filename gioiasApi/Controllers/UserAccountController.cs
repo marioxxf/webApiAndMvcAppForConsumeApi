@@ -38,10 +38,38 @@ namespace gioiasApi.Controllers
             return Ok(userAccount);
         }
 
-        [HttpGet("query/{name}")]
+        [HttpGet("name/{name}")]
         public async Task<ActionResult> GetByAproximatedName(string name)
         {
             var userAccount = await _userAccountRepository.GetByAproximatedName(name);
+
+            if (userAccount == null)
+            {
+                UserAccount nullUserAccount = new UserAccount();
+                return NotFound(nullUserAccount);
+            }
+
+            return Ok(userAccount);
+        }
+
+        [HttpGet("email/{email}")]
+        public async Task<ActionResult> GetByEmail(string email)
+        {
+            var userAccount = await _userAccountRepository.GetByEmail(email);
+
+            if (userAccount == null)
+            {
+                UserAccount nullUserAccount = new UserAccount();
+                return NotFound(nullUserAccount);
+            }
+
+            return Ok(userAccount);
+        }
+
+        [HttpGet("pass/{pass}/{email}")]
+        public async Task<ActionResult> GetAccountVerification(string pass, string email)
+        {
+            var userAccount = await _userAccountRepository.GetByPass(pass, email);
 
             if (userAccount == null)
             {

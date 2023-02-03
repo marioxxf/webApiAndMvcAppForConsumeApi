@@ -1,57 +1,72 @@
-﻿@{
+﻿@inject MiddlewareForUseSessionVariables middlewareForSessionUse
+@{
     ViewBag.Title = "Home Page";
+
+    var session = middlewareForSessionUse._httpContextAccessor.HttpContext.Session;
+    int userAccountIdLogged = Convert.ToInt32(session.GetString("UserAccountIdLogged"));
+    var userAccountUsernameLogged = session.GetString("UserAccountUsernameLogged");
 }
 
-<div class="newUserAccountMain">
-    <h1 class="newUserAccountTitle">Digite seu e-mail</h1>
-    <h2 class="newUserAccountSubTitle">Certifique-se de que você tenha acesso a ele.</h2>
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" size="25" id="txtEmail" name="txtEmail" aria-describedby="basic-addon1">
-    </div>
-    <label id="emailCheck" style="margin-bottom: 25px;" name="emailCheck"></label>
+<h1>@userAccountIdLogged @userAccountUsernameLogged</h1>
+@{
+    if (userAccountIdLogged <= 0 || userAccountIdLogged == null)
+    {
+        <div class="newUserAccountMain">
+            <h1 class="newUserAccountTitle">Digite seu e-mail</h1>
+            <h2 class="newUserAccountSubTitle">Certifique-se de que você tenha acesso a ele.</h2>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" size="25" id="txtEmail" name="txtEmail" aria-describedby="basic-addon1">
+            </div>
+            <label id="emailCheck" style="margin-bottom: 25px;" name="emailCheck"></label>
 
-    <h1 class="newUserAccountTitle">Escolha como você quer que te chamemos</h1>
-    <h2 class="newUserAccountSubTitle">É importante sabermos seu nome.</h2>
-    <div style="display: flex; gap: 20px;">
-        <div class="input-group mb-3">
-            <h3 class="newUserAccountMiniTitle">Primeiro nome</h3>
-            <input type="text" class="form-control" size="25" id="txtName" name="txtName" aria-describedby="basic-addon1">
-        </div>
-        <div class="input-group mb-3">
-            <h3 class="newUserAccountMiniTitle">Segundo nome</h3>
-            <input type="text" class="form-control" style="width:50px" size="25" id="txtNameTwo" name="txtNameTwo" aria-describedby="basic-addon1">
-        </div>
-    </div>
+            <h1 class="newUserAccountTitle">Escolha como você quer que te chamemos</h1>
+            <h2 class="newUserAccountSubTitle">É importante sabermos seu nome.</h2>
+            <div style="display: flex; gap: 20px;">
+                <div class="input-group mb-3">
+                    <h3 class="newUserAccountMiniTitle">Primeiro nome</h3>
+                    <input type="text" class="form-control" size="25" id="txtName" name="txtName" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <h3 class="newUserAccountMiniTitle">Segundo nome</h3>
+                    <input type="text" class="form-control" style="width:50px" size="25" id="txtNameTwo" name="txtNameTwo" aria-describedby="basic-addon1">
+                </div>
+            </div>
 
-    <h1 class="newUserAccountTitle">Informe seu telefone</h1>
-    <h2 class="newUserAccountSubTitle">Com este telefone, você poderá acessar sua conta.</h2>
-    <div style="display: flex; gap: 7px;">
-        <div style="margin-top: 5px;">
-            <span>+55</span>
-        </div>
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" size="25" id="txtNumber" name="txtNumber" aria-describedby="basic-addon1">
-            <div class="newUserAccountDescription">&nbsp; DDD + número.</div>
-        </div>
-    </div>
+            <h1 class="newUserAccountTitle">Informe seu telefone</h1>
+            <h2 class="newUserAccountSubTitle">Com este telefone, você poderá acessar sua conta.</h2>
+            <div style="display: flex; gap: 7px;">
+                <div style="margin-top: 5px;">
+                    <span>+55</span>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" size="25" id="txtNumber" name="txtNumber" aria-describedby="basic-addon1">
+                    <div class="newUserAccountDescription">&nbsp; DDD + número.</div>
+                </div>
+            </div>
 
-    <h1 class="newUserAccountTitle">Insira uma senha</h1>
-    <h2 class="newUserAccountSubTitle">Não compartilhe esse dado.</h2>
-    <div style="display: flex; gap: 7px;">
-        <div class="input-group mb-3">
-            <input type="password" class="form-control" size="25" id="txtPass" name="txtPass" aria-describedby="basic-addon1">
-        </div>
-        <div>
-            <span><img style="margin-top: 10px;" id="imgPass" name="imgPass" onclick="showPass(this.src)" src="~/eye.svg" height="15px" alt="" /></span>
-        </div>
-    </div><br />
+            <h1 class="newUserAccountTitle">Insira uma senha</h1>
+            <h2 class="newUserAccountSubTitle">Não compartilhe esse dado.</h2>
+            <div style="display: flex; gap: 7px;">
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" size="25" id="txtPass" name="txtPass" aria-describedby="basic-addon1">
+                </div>
+                <div>
+                    <span><img style="margin-top: 10px;" id="imgPass" name="imgPass" onclick="showPass(this.src)" src="~/eye.svg" height="15px" alt="" /></span>
+                </div>
+            </div><br />
 
-    <div class="d-grid gap-2 col-6 mx-auto">
-        <input class="btn btn-primary" type="button" value="Registrar-se" id="btnSave" name="btnSave">
-        <input type="hidden" value="@ViewData["SessionId"]" id="sessionId" name="sessionId" />
-        <input type="hidden" id="txtNickname" name="txtNickname" />
-    </div>
-</div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <input class="btn btn-primary" type="button" value="Registrar-se" id="btnSave" name="btnSave">
+                <input type="hidden" value="@ViewData["SessionId"]" id="sessionId" name="sessionId" />
+                <input type="hidden" id="txtNickname" name="txtNickname" />
+            </div>
+        </div>
+    }
+    else
+    {
+        <h1>Essa página não está disponível para usuários cadastrados.</h1>
+    }
+}
 <script>
     function forTests() {
         document.getElementById('txtEmail').value = "mario@live.com";
@@ -148,6 +163,20 @@
         return encryptedHex;
     }
 
+    function generateUsername(fullName) {
+        const parts = fullName.split(" ");
+        let username = parts[0].toLowerCase();
+
+        for (let i = 1; i < parts.length; i++) {
+            let part = parts[i];
+            username += part[0].toUpperCase() + part.slice(1).toLowerCase();
+            if (username.length > 40) break;
+        }
+
+        return username.slice(0, 40);
+    }
+
+
     function decryptPass(encryptedHexOfPassword){
         var key = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
         var encryptedBytes = aesjs.utils.hex.toBytes(encryptedHexOfPassword);
@@ -159,20 +188,27 @@
     $("#btnSave").click(function () {
         decryptPass($("#txtPass").val());
         var rest = $("#txtNameTwo").val().length;
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = (date.getMonth() + 1).toString().padStart(2, '0');
+        var day = date.getDate().toString().padStart(2, '0');
+        var formattedDate = year + "-" + month + "-" + day;
         var oUserAccount = {
             UserAccountId: "0",
             Name: $("#txtName").val() + " " + $("#txtNameTwo").val(),
-            Username: $("#txtName").val().toLowerCase() + $("#txtNameTwo").val().substr(0, 1).toUpperCase() + $("#txtNameTwo").val().substr(1, rest).toLowerCase(),
+            Username: generateUsername($("#txtName").val() + " " + $("#txtNameTwo").val()),
             Email: $("#txtEmail").val(),
             ContactNumber: $("#txtNumber").val(),
-            Password: encryptPass($("#txtPass").val())
+            Password: encryptPass($("#txtPass").val()),
+            AccessLevel: 1,
+            LoginStatus: 1,
+            CreationDate: formattedDate,
+            SessionId: $("#sessionId").val()
         };
 
-        console.log(oUserAccount);
-
-        /*$.post("/Auth/AddUserAccount", oUserAccount )
+        $.post("/Auth/AddUserAccount", oUserAccount )
             .done(function (data) {
-                window.location.href = "https://www.google.com.br/";
-            })*/
+                location.reload();
+            })
     })
 </script>

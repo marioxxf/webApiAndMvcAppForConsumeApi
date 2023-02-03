@@ -101,6 +101,10 @@ select {
     font-weight: bold;
 }
 
+.modalBodyGioiano {
+    margin-top: 15px;
+}
+
 .newUserAccountSubTitle {
     margin-top: -1px;
     font-family: 'roboto-regular';
@@ -241,4 +245,28 @@ select {
 
 ::placeholder { /* Most modern browsers support this now. */
     color: #FFFFFF;
+}
+
+.navbarGioiano {
+    font-family: "roboto-regular", Verdana;
+}
+
+.containerNavbarGioiano{
+    margin-top: 5px;
+}
+
+/* Dropdown Gioiano */
+.dropdownGioiano {
+    margin-top: -3px;
+}
+.btnDropdownGioiano {
+    margin-top: 5px;
+    background-color: transparent;
+    color: #212529;
+    border-color: transparent;
+    font-size: 16px;
+}
+
+.menuDropdownGioiano a {
+    color: #212529;
 }
