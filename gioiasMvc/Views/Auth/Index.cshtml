@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            <h1 class="newUserAccountTitle">Insira uma senha</h1>
+            <h1 class="newUserAccountTitle" onclick="test()">Insira uma senha</h1>
             <h2 class="newUserAccountSubTitle">Não compartilhe esse dado.</h2>
             <div style="display: flex; gap: 7px;">
                 <div class="input-group mb-3">
@@ -70,7 +70,7 @@
     function forTests() {
         document.getElementById('txtEmail').value = "mario@live.com";
         document.getElementById('txtName').value = "Mario";
-        document.getElementById('txtNameTwo').value = "Junior";
+        document.getElementById('txtNameTwo').value = "de Sousa Junior";
         document.getElementById('txtNumber').value = "11956533567";
         document.getElementById('txtPass').value = "123";
     }
@@ -88,7 +88,6 @@
         var pass = document.getElementById('txtPass').value;
 
         document.getElementById('txtNickname').value = name.toLowerCase() + name2.toLowerCase();
-        console.log(document.getElementById('txtNickname').value);
 
         if (emailCheck.match(/não é um.*/) || email == "") {
             document.getElementById("txtEmail").focus();
@@ -184,6 +183,22 @@
         var decryptedPass = aesjs.utils.utf8.fromBytes(decryptedBytes);
     }
 
+    function getAllUserAccounts() {
+        return new Promise((resolve, reject) => {
+            const settings = {
+                "async": true,
+                "crossDomain": true,
+                "dataType": 'JSON',
+                "url": '@Url.Action("GetAllUserAccounts", "Auth")',
+                "method": "GET"
+            };
+
+            $.ajax(settings).done(function (response) {
+                resolve(response);
+            });
+        });
+    }
+
     $("#btnSave").click(function () {
         decryptPass($("#txtPass").val());
         var rest = $("#txtNameTwo").val().length;
@@ -205,9 +220,44 @@
             SessionId: $("#sessionId").val()
         };
 
+        /* Check username availability */
+        getAllUserAccounts().then(result => {
+            var listOfUsernamesUsed = result;
+            console.log(listOfUsernamesUsed);
+            for (var p = 0; p < listOfUsernamesUsed.length; p++) {
+                if (oUserAccount.Username == listOfUsernamesUsed[p].username) {
+                    oUserAccount.Username = oUserAccount.Username + Math.floor(Math.random() * 10).toString();
+                }
+                else {
+                }
+            }
+            console.log(oUserAccount);
+            $.post("/Auth/AddUserAccount", oUserAccount)
+                .done(function (data) {
+                    //location.reload();
+                })
+        });
+        /*var usernameValidator = "";
+        var usernameValidateFix = "nok";
+        while(usernameValidateFix == "nok"){
+            checkUserUsernameAvailability(oUserAccount.Username).then(result => {
+                usernameValidator = result;
+            });
+            if (usernameValidator == "available") {
+                usernameValidateFix = "ok";
+            }
+            else {
+                var randomNumber = "";
+                for (let g = 0; g < 1; g++) {
+                    randomNumber = Math.floor(Math.random() * 10);
+                    
+                }
+                oUserAccount.Username = oUserAccount.Username + randomNumber;
+            }
+        }
         $.post("/Auth/AddUserAccount", oUserAccount )
             .done(function (data) {
-                location.reload();
-            })
+                //location.reload();
+        })*/
     })
 </script>

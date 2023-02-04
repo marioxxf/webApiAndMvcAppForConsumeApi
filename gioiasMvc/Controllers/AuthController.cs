@@ -10,6 +10,7 @@ namespace gioiasMvc.Controllers
     {
         HttpClientHandler _clientHandler = new HttpClientHandler();
         UserAccount _oUserAccount = new UserAccount();
+        List<UserAccount> _oUserAccounts = new List<UserAccount>();
         public IActionResult Index()
         {
             HttpContext.Session.SetString("SessionKey", "Any"); // Isso trava a geração de um novo SessionID a cada requisição na mesma instância de navegador
@@ -31,6 +32,38 @@ namespace gioiasMvc.Controllers
                 }
             }
             return _oUserAccount;
+        }
+
+        [HttpGet]
+        public async Task<UserAccount> GetByUsername(string nameToFind)
+        {
+            _oUserAccount = new UserAccount();
+
+            using (var httpClient = new HttpClient(_clientHandler))
+            {
+                using (var response = await httpClient.GetAsync("https://localhost:7200/api/UserAccount/username/" + nameToFind + "?apiKey=secretKey"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    _oUserAccount = JsonConvert.DeserializeObject<UserAccount>(apiResponse);
+                }
+            }
+            return _oUserAccount;
+        }
+
+        [HttpGet]
+        public async Task<List<UserAccount>> GetAllUserAccounts()
+        {
+            _oUserAccounts = new List<UserAccount>();
+
+            using (var httpClient = new HttpClient(_clientHandler))
+            {
+                using (var response = await httpClient.GetAsync("https://localhost:7200/api/UserAccount?apiKey=secretKey"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    _oUserAccounts = JsonConvert.DeserializeObject<List<UserAccount>>(apiResponse);
+                }
+            }
+            return _oUserAccounts;
         }
 
         [HttpGet]

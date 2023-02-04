@@ -46,6 +46,11 @@ namespace gioiasApi.Repositories
             return await _context.UserAccount.Where(x => x.Email == emailToFind).FirstOrDefaultAsync();
         }
 
+        public async Task<UserAccount> GetByUsername(string nameToFind)
+        {
+            return await _context.UserAccount.Where(x => x.Username == nameToFind).FirstOrDefaultAsync();
+        }
+
         public async Task<UserAccount> GetByPass(string passToFind, string emailToFind)
         {
             return await _context.UserAccount.Where(x => x.Password == passToFind && x.Email == emailToFind).FirstOrDefaultAsync();

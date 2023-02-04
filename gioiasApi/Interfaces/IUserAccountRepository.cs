@@ -13,6 +13,8 @@ namespace gioiasApi.Interfaces
 
         Task<UserAccount> GetByEmail(string emailToFind);
 
+        Task<UserAccount> GetByUsername(string nameToFind);
+
         Task<UserAccount> GetByPass(string passToFind, string emailToFind);
 
         Task<IEnumerable<UserAccount>> GetAll();
