@@ -5,7 +5,10 @@
     var session = middlewareForSessionUse._httpContextAccessor.HttpContext.Session;
     var userAccountIdLogged = session.GetString("UserAccountIdLogged");
     var userAccountUsernameLogged = session.GetString("UserAccountUsernameLogged");
+    var userAccountNameLogged = session.GetString("UserAccountNameLogged");
 }
+
+<h1>ID: @userAccountIdLogged Username: @userAccountUsernameLogged Name: @userAccountNameLogged</h1>
 
 @{
     if (userAccountIdLogged == "" || userAccountIdLogged == "0" || userAccountIdLogged == null)
@@ -16,7 +19,7 @@
             <div class="input-group mb-3">
                 <input type="text" class="form-control" size="25" id="txtEmail" name="txtEmail" aria-describedby="basic-addon1">
             </div>
-            <label id="emailCheck" style="margin-bottom: 25px;" name="emailCheck"></label>
+            <label id="emailCheck" style="margin-bottom: 20px;" name="emailCheck"></label>
 
             <h1 class="newUserAccountTitle">Escolha como você quer que te chamemos</h1>
             <h2 class="newUserAccountSubTitle">É importante sabermos seu nome.</h2>
@@ -223,7 +226,6 @@
         /* Check username availability */
         getAllUserAccounts().then(result => {
             var listOfUsernamesUsed = result;
-            console.log(listOfUsernamesUsed);
             for (var p = 0; p < listOfUsernamesUsed.length; p++) {
                 if (oUserAccount.Username == listOfUsernamesUsed[p].username) {
                     oUserAccount.Username = oUserAccount.Username + Math.floor(Math.random() * 10).toString();
@@ -231,33 +233,27 @@
                 else {
                 }
             }
-            console.log(oUserAccount);
-            $.post("/Auth/AddUserAccount", oUserAccount)
-                .done(function (data) {
-                    //location.reload();
-                })
-        });
-        /*var usernameValidator = "";
-        var usernameValidateFix = "nok";
-        while(usernameValidateFix == "nok"){
-            checkUserUsernameAvailability(oUserAccount.Username).then(result => {
-                usernameValidator = result;
-            });
-            if (usernameValidator == "available") {
-                usernameValidateFix = "ok";
-            }
-            else {
-                var randomNumber = "";
-                for (let g = 0; g < 1; g++) {
-                    randomNumber = Math.floor(Math.random() * 10);
-                    
+
+            /* Check email availability */
+            for (var o = 0; o < listOfUsernamesUsed.length; o++){
+                if (oUserAccount.Email == listOfUsernamesUsed[o].email) {
+                    document.getElementById("txtEmail").focus();
+                    document.getElementById('emailCheck').style.color = "red";
+                    document.getElementById('emailCheck').textContent = "O e-mail inserido já está em uso. Por favor, utilize outro.";
+                    return;
                 }
-                oUserAccount.Username = oUserAccount.Username + randomNumber;
+                else {
+                }
             }
-        }
-        $.post("/Auth/AddUserAccount", oUserAccount )
-            .done(function (data) {
-                //location.reload();
-        })*/
+
+            if (document.getElementById('emailCheck').textContent == "") {
+                $.post("/Auth/AddUserAccount", oUserAccount)
+                    .done(function (data) {
+                        location.reload();
+                    })
+            } else {
+                document.getElementById("txtEmail").focus();
+            }
+        });
     })
 </script>
