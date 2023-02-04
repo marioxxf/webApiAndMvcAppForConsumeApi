@@ -15,7 +15,7 @@ namespace gioiasApi.Models
         [StringLength(35)]
         [Unicode(false)]
         public string Name { get; set; }
-        [StringLength(18)]
+        [StringLength(25)]
         [Unicode(false)]
         public string Username { get; set; }
         [StringLength(40)]
