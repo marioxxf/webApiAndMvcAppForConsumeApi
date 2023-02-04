@@ -52,7 +52,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Página principal</a>
                         </li>
                         @{
-                            if(userAccountIdLogged.ToString().Length > 0)
+                            if(userAccountIdLogged != "0" && userAccountIdLogged != "")
                             {
                                 <li>
                                     <div class="dropdown dropdownGioiano">
