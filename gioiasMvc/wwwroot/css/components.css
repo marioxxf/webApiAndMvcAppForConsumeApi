@@ -93,6 +93,7 @@ select {
     margin-right: 50px;
     margin-left: 50px;
     color: #474042;
+    font-family: "roboto-regular", Verdana;
 }
 
 .newUserAccountTitle {
@@ -253,6 +254,78 @@ select {
 
 .containerNavbarGioiano{
     margin-top: 5px;
+}
+
+.inputGioiano {
+    margin-right: 35%;
+}
+
+.personalInfo {
+    display: flex;
+    gap: 7px;
+    margin-left: -15px
+}
+
+@media only screen and (min-width: 768px) {
+    .personalInfo {
+        margin-right: 75%;
+        margin-left: -5px
+    }
+}
+
+.personalInfoText {
+    white-space: nowrap;
+    font-size: 17px;
+    margin-top: 2px;
+}
+
+@media only screen and (min-width: 768px) {
+    .personalInfoText {
+        white-space: nowrap;
+        font-size: 25px;
+        margin-top: 24px;
+        margin-left: 10px;
+    }
+}
+
+.personalInfoSubText {
+    white-space: nowrap;
+    font-size: 12px;
+    margin-top: 2.5px;
+}
+
+@media only screen and (min-width: 768px) {
+    .personalInfoSubText {
+        white-space: nowrap;
+        font-size: 18px;
+        margin-top: -3px;
+    }
+}
+
+.personalInfoSubTextTitle {
+    color: rgb(171, 170, 167);
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+@media only screen and (min-width: 768px) {
+    .personalInfoSubTextTitle {
+        margin-left: 11px;
+        font-size: 17px;
+        white-space: nowrap;
+        margin-top: -20px;
+        margin-right: 90px;
+    }
+}
+
+.userImgPhoto {
+    height: 50px;
+}
+
+@media only screen and (min-width: 768px) {
+    .userImgPhoto {
+        height: 175px;
+    }
 }
 
 /* Dropdown Gioiano */

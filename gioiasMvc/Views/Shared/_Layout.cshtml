@@ -60,7 +60,7 @@
                                             <img style="margin-left: 10px; margin-right: 3px; margin-top: -2px;" src="~/user-black.svg" height="20px" alt="" />@userAccountNameLogged
                                         </button>
                                         <ul class="dropdown-menu menuDropdownGioiano">
-                                            <li><a class="dropdown-item" href="#">Minha conta</a></li>
+                                            <li><a class="dropdown-item" href="/auth/myaccount">Minha conta</a></li>
                                             <li role="separator" class="divider"></li>
                                             <li><a class="dropdown-item" onclick="disconnectUserAccount()">Desconectar</a></li>
                                         </ul>
@@ -105,19 +105,20 @@
             <div class="loginUserAccountMain">
                 <h1 class="newUserAccountTitle">Digite seu e-mail</h1>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control"  size="25" id="txtEmailLoginForm" name="txtEmailLoginForm" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control inputGioiano" id="txtEmailLoginForm" name="txtEmailLoginForm" aria-describedby="basic-addon1">
                 </div>
                 <label id="emailCheckLoginForm" name="emailCheckLoginForm"></label><br /><br />
 
                 <h1 class="newUserAccountTitle">Insira uma senha</h1>
                 <div style="display: flex; gap: 7px;">
                     <div class="input-group mb-3">
-                        <input oninput="resetPassEntered()" type="password" class="form-control" size="25" id="txtPassLoginForm" name="txtPassLoginForm" aria-describedby="basic-addon1">
+                        <input oninput="resetPassEntered()" type="password" class="form-control inputGioiano" id="txtPassLoginForm" name="txtPassLoginForm" aria-describedby="basic-addon1">
                     </div>
                     <div>
-                        <span><img style="margin-top: 10px;" id="imgPassLoginForm" name="imgPassLoginForm" onclick="showPassLoginForm(this.src)" src="~/eye.svg" height="15px" alt="" /></span>
+                        <a href="#"><span><img style="margin-top: 10px;" id="imgPassLoginForm" name="imgPassLoginForm" onclick="showPassLoginForm(this.src)" src="~/eye.svg" height="15px" alt="" /></span></a>
                     </div>
-                </div><label id="passCheck" name="passCheck"></label><br /><br />
+                </div>
+                <label id="passCheck" name="passCheck"></label><br /><br />
 
                 <div class="d-grid gap-2 col-6 mx-auto">
                     <input class="btn btn-primary" type="button" value="Logar-se" onclick="validateForm();">
