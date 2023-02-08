@@ -31,10 +31,17 @@
                             <div class="newPersonalInfoItemTitle">E-mail</div>
                             <div class="newPersonalInfoContent" id="txtEmail" name="txtEmail"></div>
                         </div>
-
                         <div class="newPersonalInfoItem">
                             <div class="newPersonalInfoItemTitle">Usuário desde</div>
                             <div class="newPersonalInfoContent" id="txtCreationDate" name="txtCreationDate"></div>
+                        </div>
+                        <div class="newPersonalInfoItem">
+                            <div class="newPersonalInfoItemTitle">Número para contato</div>
+                            <div class="newPersonalInfoContent" id="txtContactNumber" name="txtContactNumber"></div>
+                        </div>
+                        <div class="newPersonalInfoItem">
+                            <div class="newPersonalInfoItemTitle">ID do usuário</div>
+                            <div class="newPersonalInfoContent" id="txtUserAccountId" name="txtUserAccountId"></div>
                         </div>
                     </div>
                 </div>
@@ -47,6 +54,10 @@
     $(document).ready(function () {
         loadUserAccountData();
     });
+
+    function formatPhoneNumber(phoneNumber) {
+        return '(' + phoneNumber.substring(0, 2) + ') ' + phoneNumber.substring(2, 7) + '-' + phoneNumber.substring(7);
+    }
 
     function getUserAccountData(userAccountId) {
         //$(".loader").show();
@@ -79,9 +90,8 @@
                                 date.getFullYear());
 
             document.getElementById('txtCreationDate').textContent = formattedDate;
-
-
-
+            document.getElementById('txtContactNumber').textContent = formatPhoneNumber(result.contactNumber);
+            document.getElementById('txtUserAccountId').textContent = result.userAccountId;
         });
     }
 </script>

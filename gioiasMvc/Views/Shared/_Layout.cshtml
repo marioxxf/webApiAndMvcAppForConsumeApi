@@ -76,7 +76,7 @@
                                         </button>
                                         <ul class="dropdown-menu menuDropdownGioiano">
                                             <li>
-                                                <a class="dropdown-item" href="/auth">Criar conta</a>
+                                                <a class="dropdown-item" href="/auth/newaccount">Criar conta</a>
                                             </li>
                                             <li>
                                                 <a class="dropdown-item" data-bs-toggle="modal" href="#" data-bs-target="#exampleModal">Logar-se</a>
@@ -110,9 +110,9 @@
                 <label id="emailCheckLoginForm" name="emailCheckLoginForm"></label><br /><br />
 
                 <h1 class="newUserAccountTitle">Insira uma senha</h1>
-                <div style="display: flex; gap: 7px;">
+                <div style="display: inline-flex; gap: 7px;">
                     <div class="input-group mb-3">
-                        <input oninput="resetPassEntered()" type="password" class="form-control inputGioiano" id="txtPassLoginForm" name="txtPassLoginForm" aria-describedby="basic-addon1">
+                                <input oninput="resetPassEntered()" type="password" class="form-control passwordInputGioiano" id="txtPassLoginForm" name="txtPassLoginForm" aria-describedby="basic-addon1">
                     </div>
                     <div>
                         <a href="#"><span><img style="margin-top: 10px;" id="imgPassLoginForm" name="imgPassLoginForm" onclick="showPassLoginForm(this.src)" src="~/eye.svg" height="15px" alt="" /></span></a>

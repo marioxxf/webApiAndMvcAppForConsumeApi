@@ -257,13 +257,12 @@ select {
 }
 
 .inputGioiano {
-    margin-right: 35%;
+    margin-right: 30%;
 }
 
-
-
-
-
+.passwordInputGioiano {
+    margin-right: 10%;
+}
 
 .newPersonalInfo {
     display: flex;
@@ -287,9 +286,16 @@ select {
 
 .newPersonalInfoContent {
     width: 40%;
+    white-space: nowrap;
+    margin-top: 2px;
 }
 
-
+@media only screen and (min-width: 768px) {
+    .newPersonalInfoContent {
+        width: 20%;
+        white-space: nowrap;
+    }
+}
 
 @media (max-width: 767px) {
     .newPersonalInfo {
