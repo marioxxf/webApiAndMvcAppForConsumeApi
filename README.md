@@ -37,7 +37,7 @@ B. With pass. in request<br />
       <img src="https://i.imgur.com/CMfOYru.png"></img>
    </details>
    <details>
-      <summary><h4>2.2 Login in mobile</h4></summary>
+      <summary><h4>2.2 Mobile login</h4></summary>
       <img src="https://i.imgur.com/O3MYj3K.png"></img>
    </details>
    <details>
