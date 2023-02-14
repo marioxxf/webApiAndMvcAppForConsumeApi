@@ -9,12 +9,12 @@
         userAccountIdLogged = session.GetString("UserAccountIdLogged");
     }
 
-    if(session.GetString("UserAccountUsernameLogged") != null)
+    if (session.GetString("UserAccountUsernameLogged") != null)
     {
         userAccountUsernameLogged = session.GetString("UserAccountUsernameLogged");
     }
 
-    if(session.GetString("UserAccountNameLogged") != null)
+    if (session.GetString("UserAccountNameLogged") != null)
     {
         userAccountNameLogged = session.GetString("UserAccountNameLogged");
     }
@@ -52,7 +52,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Página principal</a>
                         </li>
                         @{
-                            if(userAccountIdLogged != "0" && userAccountIdLogged != "")
+                            if (userAccountIdLogged != "0" && userAccountIdLogged != "")
                             {
                                 <li>
                                     <div class="dropdown dropdownGioiano">
@@ -62,7 +62,7 @@
                                         <ul class="dropdown-menu menuDropdownGioiano">
                                             <li><a class="dropdown-item" href="/auth/myaccount">Minha conta</a></li>
                                             <li role="separator" class="divider"></li>
-                                            <li><a class="dropdown-item" onclick="disconnectUserAccount()">Desconectar</a></li>
+                                            <li><a class="dropdown-item" onclick="disconnectUserAccount()" href="#">Desconectar</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -80,7 +80,7 @@
                                             </li>
                                             <li>
                                                 <a class="dropdown-item" data-bs-toggle="modal" href="#" data-bs-target="#exampleModal">Logar-se</a>
-                                                
+
                                             </li>
                                         </ul>
                                     </div>
@@ -95,43 +95,43 @@
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Faça o login e aproveite nossa plataforma</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body modalBodyGioiano">
-            <div class="loginUserAccountMain">
-                <h1 class="newUserAccountTitle">Digite seu e-mail</h1>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control inputGioiano" id="txtEmailLoginForm" name="txtEmailLoginForm" aria-describedby="basic-addon1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Faça o login e aproveite nossa plataforma</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <label id="emailCheckLoginForm" name="emailCheckLoginForm"></label><br /><br />
+                <div class="modal-body modalBodyGioiano">
+                    <div class="loginUserAccountMain">
+                        <h1 class="newUserAccountTitle">Digite seu e-mail</h1>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control inputGioiano" id="txtEmailLoginForm" name="txtEmailLoginForm" aria-describedby="basic-addon1">
+                        </div>
+                        <label id="emailCheckLoginForm" name="emailCheckLoginForm"></label><br /><br />
 
-                <h1 class="newUserAccountTitle">Insira uma senha</h1>
-                <div style="display: inline-flex; gap: 7px;">
-                    <div class="input-group mb-3">
+                        <h1 class="newUserAccountTitle">Insira uma senha</h1>
+                        <div style="display: inline-flex; gap: 7px;">
+                            <div class="input-group mb-3">
                                 <input oninput="resetPassEntered()" type="password" class="form-control passwordInputGioiano" id="txtPassLoginForm" name="txtPassLoginForm" aria-describedby="basic-addon1">
-                    </div>
-                    <div>
-                        <a href="#"><span><img style="margin-top: 10px;" id="imgPassLoginForm" name="imgPassLoginForm" onclick="showPassLoginForm(this.src)" src="~/eye.svg" height="15px" alt="" /></span></a>
+                            </div>
+                            <div>
+                                <a href="#"><span><img style="margin-top: 10px;" id="imgPassLoginForm" name="imgPassLoginForm" onclick="showPassLoginForm(this.src)" src="~/eye.svg" height="15px" alt="" /></span></a>
+                            </div>
+                        </div>
+                        <label id="passCheck" name="passCheck"></label><br /><br />
+
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <input class="btn btn-primary" type="button" value="Logar-se" onclick="validateForm();">
+                            <input type="hidden" value="@ViewData["SessionId"]" id="sessionIdLoginForm" name="sessionIdLoginForm" />
+                        </div>
                     </div>
                 </div>
-                <label id="passCheck" name="passCheck"></label><br /><br />
-
-                <div class="d-grid gap-2 col-6 mx-auto">
-                    <input class="btn btn-primary" type="button" value="Logar-se" onclick="validateForm();">
-                    <input type="hidden" value="@ViewData["SessionId"]" id="sessionIdLoginForm" name="sessionIdLoginForm" />
+                <div class="modal-footer">
                 </div>
             </div>
-          </div>
-          <div class="modal-footer">
-          </div>
         </div>
-      </div>
     </div>
-    
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -151,14 +151,14 @@
 </html>
 
 <script>
-    function disconnectUserAccount(){
+    function disconnectUserAccount() {
         $.ajax({
-          type: "POST",
+            type: "POST",
             url: '@Url.Action("DisconnectUserAccountLogged", "Auth")',
-          success: function(response) {
-            console.log("User Account has been disconnected.");
+            success: function (response) {
+                console.log("User Account has been disconnected.");
                 window.location.href = "/";
-          }
+            }
         });
     }
     /* Abaixo, funções da modal */
@@ -200,7 +200,7 @@
         });
     }
 
-    function checkPass(pass, email){
+    function checkPass(pass, email) {
         return new Promise((resolve, reject) => {
             /* Check if email exists */
             const settings = {
@@ -237,7 +237,7 @@
         checkPass(pass, email).then(result => {
             passValidator = result;
         });
-        
+
 
         /* Form validation */
         setTimeout(function () {
@@ -246,7 +246,7 @@
                 document.getElementById('emailCheckLoginForm').style.color = "red";
                 document.getElementById('emailCheckLoginForm').textContent = "Insira um e-mail válido para tentar autenticar-se.";
             }
-            else if (pass.length < 1){
+            else if (pass.length < 1) {
                 document.getElementById("txtPassLoginForm").focus();
                 document.getElementById('passCheck').style.color = "red";
                 document.getElementById('passCheck').textContent = "Precisamos de uma senha para autenticar você.";

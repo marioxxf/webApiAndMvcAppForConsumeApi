@@ -24,7 +24,7 @@
             <div style="display: flex; gap: 20px;">
                 <div class="input-group mb-3">
                     <h3 class="newUserAccountMiniTitle">Primeiro nome</h3>
-                    <input type="text" class="form-control" size="25" id="txtName" name="txtName" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" style="width:50px" size="25" id="txtName" name="txtName" aria-describedby="basic-addon1">
                 </div>
                 <div class="input-group mb-3">
                     <h3 class="newUserAccountMiniTitle">Segundo nome</h3>
@@ -176,7 +176,7 @@
     }
 
 
-    function decryptPass(encryptedHexOfPassword){
+    function decryptPass(encryptedHexOfPassword) {
         var key = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
         var encryptedBytes = aesjs.utils.hex.toBytes(encryptedHexOfPassword);
         var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
@@ -233,7 +233,7 @@
             }
 
             /* Check email availability */
-            for (var o = 0; o < listOfUsernamesUsed.length; o++){
+            for (var o = 0; o < listOfUsernamesUsed.length; o++) {
                 if (oUserAccount.Email == listOfUsernamesUsed[o].email) {
                     document.getElementById("txtEmail").focus();
                     document.getElementById('emailCheck').style.color = "red";
